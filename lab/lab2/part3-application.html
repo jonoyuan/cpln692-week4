@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" integrity="sha256-YR4HrDE479EpYZgeTkQfgVJq08+277UXxMLbi/YP69o=" crossorigin="anonymous" />
+  </head>
+  <body>
+
+    <!--Left Panel-->
+    <div style="position: absolute; left: 0px; width: 400px; top: 0; bottom: 0;">
+      <br>
+      Numeric filter: <input id="num1" type="number" name="num1" value=""> to <input id="num2" type="number" name="num2" value="">
+      <br>
+      String filter: <input id="string" type="text">
+      <br>
+      Boolean filter: <input id="boolean" type="checkbox">
+      <br>
+      <button id="my-button">Plot Data</button>
+    </div>
+    <!-- Map -->
+    <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;"></div>
+
+    <!-- Javascript Imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js" integrity="sha256-6BZRSENq3kxI4YYBDqJ23xg0r1GwTHEpvp3okdaIqBw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js" integrity="sha256-O4179En8zabOlPYBNvGp8cF0uh0vnSZpW4Q6Ul1h+8c=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <!-- Javascript Code: Notice that code is executed in the order of import -->
+    <script src="js/part3-setup.js"></script>
+    <script src="js/part3-application.js"></script>
+    <script src="js/part3-main.js"></script>
+  </body>
+</html>
