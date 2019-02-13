@@ -22,7 +22,7 @@
     - Managing state
 - [Lab 2](lab/lab2/)
 
-## Homework Assignment (Due: Wednesday, February 8)
+## Homework Assignment (Due: Thursday, February 14)
 - Complete [Code Academy HTML
  Elements (Module 1)](https://www.codecademy.com/learn/learn-html)
 - Complete [Code Academy CSS Modules
