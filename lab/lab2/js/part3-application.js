@@ -28,9 +28,16 @@
   Define a resetMap function to remove markers from the map and clear the array of markers
 ===================== */
 var resetMap = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+  map.eachLayer(function(layer) {
+    if (layer != Stamen_TonerLite) {
+      map.removeLayer(layer);
+    }
+  });
+  //myMarkers = []; // I only want to do this once in getAndParseData(); to remove the bogus data
+
+  _.each(myMarkers, mk => mk.addTo(map))
+
+  console.log("Map reset");
 };
 
 /* =====================
@@ -38,18 +45,108 @@ var resetMap = function() {
   will be called as soon as the application starts. Be sure to parse your data once you've pulled
   it down!
 ===================== */
+crash = L.CircleMarker.extend({
+  options: {
+    CRASH_YEAR:undefined,
+    POLICE_AGC:undefined,
+    ALCOHOL_RE:undefined,
+    SHOW_MAP:1,
+  }
+});
 var getAndParseData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+  myMarkers = [];
+  resetMap();
+  $.ajax(
+    "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json"
+  ).done((data) => {
+
+    popo = [];
+    hour = [];
+
+    let parsed = JSON.parse(data);
+    parsed.forEach(pt => {
+      let popup = `
+        Hour of Day: ${pt.HOUR_OF_DA}<br>
+        Police agency code: ${pt.POLICE_AGC}<br>
+        Alcohol-related: ${pt.ALCOHOL_RE === 1}
+      `;
+      let mk = new crash([pt.LAT,pt.LNG], {
+        color: 'red',
+        radius: 1,
+        HOUR_OF_DA: pt.HOUR_OF_DA,
+        POLICE_AGC: pt.POLICE_AGC,
+        ALCOHOL_RE: pt.ALCOHOL_RE
+      }).bindPopup(popup);
+
+      myMarkers.push(mk);
+      popo.push(pt.POLICE_AGC);
+      hour.push(pt.HOUR_OF_DA);
+
+      mk.addTo(map);
+
+    });
+
+    $('#string,#num1,#num2').prop("value","");
+    $('#my-button').html("Filter me!");
+    $('#string,.num,#boolean,#my-button,option').prop("disabled",false);
+    $('option').remove();
+
+    popo = new Set(popo.sort());
+    popo.forEach(function(value) {
+      $('#string')
+        .append($("<option></option>")
+          .attr("value",value)
+          .text(value)
+        );
+    });
+
+    hour = new Set(_.each(hour,Number).sort(function(a, b){return a-b}));
+    hour.forEach(function(value) {
+      $('.num')
+        .append($("<option></option>")
+          .attr("value",value)
+          .text(value)
+        );
+    });
+  });
+
+  console.log("Map ready");
 };
 
 /* =====================
   Call our plotData function. It should plot all the markers that meet our criteria (whatever that
   criteria happens to be — that's entirely up to you)
 ===================== */
+
+var notbetween = function(num, a, b) {
+  num = Number(num); a = Number(a); b = Number(b);
+  var min = Math.min.apply(Math, [a, b]),
+    max = Math.max.apply(Math, [a, b]);
+  if (num !== undefined) {return num < min || num > max;}
+  else {return true;}
+};
+
+var lyr;
+var con = [];
+
 var plotData = function() {
-  /* =====================
-    Fill out this function definition
-  ===================== */
+  lyr = 0;
+
+  map.eachLayer(function(layer) {
+    if (layer != Stamen_TonerLite) {
+      let opt = layer.options;
+
+      let num = notbetween(opt.HOUR_OF_DA,numericField1,numericField2);
+      let str = opt.POLICE_AGC == stringField;
+
+      let condition = str;
+
+      if (condition) {
+        lyr = lyr + 1;
+        map.removeLayer(layer);
+      }
+    }
+  });
+
+  console.log(`Removed ${lyr} layers`);
 };

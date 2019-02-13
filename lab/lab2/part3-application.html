@@ -7,15 +7,26 @@
   <body>
 
     <!--Left Panel-->
-    <div style="position: absolute; left: 0px; width: 400px; top: 0; bottom: 0;">
-      <br>
-      Numeric filter: <input id="num1" type="number" name="num1" value=""> to <input id="num2" type="number" name="num2" value="">
-      <br>
-      String filter: <input id="string" type="text">
-      <br>
-      Boolean filter: <input id="boolean" type="checkbox">
-      <br>
-      <button id="my-button">Plot Data</button>
+    <div style="position: absolute; left: 0px; width: 400px; top: 0; bottom: 0;padding:10px;">
+      <p>
+        Hour of day between: <br>
+        <select class="num" id="num1" style="width:60px" disabled>
+          <option value="" disabled selected>loading</option>
+        </select> and
+        <select class="num" id="num2" style="width:60px" disabled>
+          <option value="" disabled selected>loading</option>
+        </select>
+      </p><p>
+        Police agency code: <br>
+        <select id="string" style="width:100px" disabled>
+          <option value="" disabled selected>loading data...</option>
+        </select>
+      </p><p>
+        Alcohol-related crashes only: <br>
+        <input id="boolean" type="checkbox" disabled>(check if yes)
+      </p><p>
+        <button id="my-button" disabled>loading data...</button> <a href="#" onclick="resetMap();">Reset map</a>
+      </p>
     </div>
     <!-- Map -->
     <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;"></div>
