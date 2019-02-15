@@ -1,3 +1,7 @@
+##### THIS BRANCH ABANDONED
+
+See comments in [part3-application.js](js/part3-application.js).
+
 # Lab 2
 
 #### Part 1: Plotting with external data (ajax calls)

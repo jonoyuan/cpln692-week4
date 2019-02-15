@@ -1,3 +1,9 @@
+/* == THIS BRANCH IS ABANDONED
+  For some reason, when calling map.removeLayer() inside an if statement, all
+  layers are hidden while only some layers are removed. In the `map` object,
+  some layers still exist, but none are displayed. Line 152
+*/
+
 /* =====================
   Lab 2, part3: a full application
 
@@ -144,6 +150,7 @@ var plotData = function() {
       if (condition) {
         lyr = lyr + 1;
         map.removeLayer(layer);
+        // For some reason, all layers are not displayed even if only a few are removed
       }
     }
   });
