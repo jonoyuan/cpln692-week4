@@ -11,6 +11,9 @@ getAndParseData();
   The code here is triggered when you click on the button with ID #my-button
   ALL functions called here will be called EVERY time a click event fires
 ===================== */
+
+$('a#reset-button').click(function() {resetMap();});
+
 $('button#my-button').click(function(e) {
   numericField1 = $('#num1').val();
   console.log("numericFieldMin", numericField1);
